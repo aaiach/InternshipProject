@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<!-- CSS FILES -->
+		<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/uikit@latest/dist/css/uikit.min.css">
+		<link rel="stylesheet" type="text/css" href="css/marketing.css">
+	</head>
+	<body>
+		<!-- INFO -->
+		<section class="uk-section uk-section-default uk-box-shadow-small uk-section-xsmall">
+			<div class="uk-container">
+				<div>
+					<img width="120px" height="120px" class="uk-align-center uk-border-rounded" src="img/profilepic.png">
+				</div>	
+				<div class="uk-flex uk-flex-center">
+					<h4 class="uk-margin-remove">Name LastName</h4>
+				</div>
+				<div class="uk-flex uk-flex-center">
+					<i class="uk-text-muted uk-text-small">Profession</i>
+				</div>
+			</div>
+		</section>
+		<!-- /INFO -->
+		<section id="content" class="uk-section uk-section-default">
+			<div class="uk-container uk-width-3-4">
+				<div class="uk-section uk-section-small uk-padding-remove-top">
+					<ul class="uk-subnav uk-subnav-pill uk-flex uk-flex-center" data-uk-switcher="connect: .uk-switcher; animation: uk-animation-fade">
+						<li><a class="uk-border-pill" href="#">Présentation</a></li>
+						<li><a class="uk-border-pill" href="#">Tarifs</a></li>
+						<li><a class="uk-border-pill" href="#">Reviews</a></li>
+					</ul>
+				</div>
+
+				<ul class="uk-switcher uk-margin">
+					<li>
+						<div class="uk-grid uk-flex-middle" data-uk-grid data-uk-scrollspy="target: > div; cls: uk-animation-slide-left-medium">
+							
+							<div data-uk-scrollspy-class="uk-animation-slide-right-medium">
+								<h6 class="uk-text-primary">MAIN REASONS</h6>
+								<h2 class="uk-margin-small-top">Take decisions with real time data based on users interaction.</h2>
+								<p class="subtitle-text">
+									Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+									tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+									quis nostrud exercitation.
+								</p>
+								<div class="uk-grid uk-child-width-1-2@s" data-uk-grid>
+									<div>
+										<h4>Great stuff</h4>
+										<p>Ut enim ad minim veniam, quis nostrud magna aliqua exercitation. <a href="">Learn more.</a></p>
+									</div>
+									<div>
+										<h4>Data analysis</h4>
+										<p>Ut enim ad minim veniam, quis nostrud magna aliqua exercitation. <a href="">Learn more.</a></p>
+									</div>
+								</div>
+							</div>
+						</div>
+					</li>
+					<li>
+						<div class="uk-grid uk-flex-middle" data-uk-grid data-uk-scrollspy="target: > div; cls: uk-animation-slide-left-medium">
+							<div data-uk-scrollspy-class="uk-animation-slide-right-medium" class="uk-align-center uk-width-3-4">
+								<table class="uk-table uk-table-striped">
+								    <thead>
+								        <tr>
+								            <th>Produit</th>
+								            <th>Prix</th>
+								            <th>Description</th>
+								        </tr>
+								    </thead>
+								    <tbody id="productTable">
+								        
+								    </tbody>
+								</table>
+							</div>
+						</div>
+					</li>
+					<li>
+						<div class="uk-grid uk-flex-middle" data-uk-grid data-uk-scrollspy="target: > div; cls: uk-animation-slide-left-medium">
+							<div data-uk-scrollspy-class="uk-animation-slide-right-medium">
+								<h6 class="uk-text-primary">MAIN REASONS</h6>
+								<h2 class="uk-margin-small-top">Take decisions with real time data based on users interaction.</h2>
+								<p class="subtitle-text">
+									Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+									tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+									quis nostrud exercitation.
+								</p>
+								<div class="uk-grid uk-child-width-1-2@s" data-uk-grid>
+									<div>
+										<h4>Great stuff</h4>
+										<p>Ut enim ad minim veniam, quis nostrud magna aliqua exercitation. <a href="">Learn more.</a></p>
+									</div>
+									<div>
+										<h4>Data analysis</h4>
+										<p>Ut enim ad minim veniam, quis nostrud magna aliqua exercitation. <a href="">Learn more.</a></p>
+									</div>
+								</div>
+							</div>
+						</div>
+					</li>
+				</ul>
+				
+				
+			</div>
+		</section>
+	
+		
+		<!-- JS FILES -->
+		<script src="https://cdn.jsdelivr.net/npm/uikit@latest/dist/js/uikit.min.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/uikit@latest/dist/js/uikit-icons.min.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+		<script src="./include/js/cookies.js"></script>
+		<script>
+
+			$(function () {
+				let searchParams = new URLSearchParams(window.location.search)
+				if( searchParams.has('id')){
+					$.ajax({
+						url: '../api/getProducts.php?id=' + searchParams.get('id'),
+						dataType: 'json',
+						type: 'get',
+						processData: false,
+						success: function( data, textStatus, jQxhr ){
+				   			let table = $('#productTable');
+							$.each(data.data, function (key, entry) {
+								console.log(entry)
+								table.append($('<tr><td> ' + entry.name + '</td> <td> ' + entry.price + '  </td> <td> ' + entry.description + '   </td></tr>'));
+							})
+						},
+						error: function( data ){
+						    console.log(data)
+						}
+					});
+				}
+			})
+		</script>
+
+	</body>
+</html>

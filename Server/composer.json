@@ -1,0 +1,13 @@
+{
+    "name": "vendor/name",
+    "type": "project",
+    "authors": [
+        {
+            "name": "aaiach",
+            "email": "adriel.aiach@gmail.com"
+        }
+    ],
+    "require": {
+        "firebase/php-jwt": "^5.2"
+    }
+}
